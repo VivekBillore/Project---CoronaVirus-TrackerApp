@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coronavirus tracking system</title>
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+Bhai+2:wght@500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+     <div class="fornav">
+
+       <nav>
+           <li id="mynav">
+               <ul>Home</ul>
+               <ul>Contact Us</ul>
+               <ul>The Data</ul>
+               <ul>Analysis</ul>
+              
+               <div class="dropdown">
+                <button class="dropbtn"> Menu
+                  <i class="fa fa-caret-down"></i>
+                </button>
+                <div class="dropdown-content">
+                  <a href="#">page1</a>
+                  <a href="#">page2</a></a>
+                  <a href="#">page3</a>
+                </div>
+
+
+
+
+           </li>
+       </nav>
+
+     </div>
+
+     <div >
+        <h1>Coronavirus Tracker WebApp</h1>
+      <img  id="myimg" src="col.jpg" >
+     </div>
+
+     <div class="mysearch">
+
+        <form  id="myform"  >
+
+            <input type="text"  id="country" placeholder="Enter your country name " required>
+             <input type="submit" id="submit" value="Get data">
+         </form>
+         <div class="below">
+        <h2 id="active">Total Active : </h2>
+        <h2 id="confirmed">Total Confirmed : </h2>
+        <h2 id="recovered">Total Recovered : </h2>
+        <h2 id="deaths">Total Deaths : </h2>
+         </div>
+     </div>
+     <div class="space">
+
+     </div>
+    
+     <footer id="foot">
+        <p>Copyright &copy; 2021 Corona tracker Company</p>
+    </footer>
+     
+
+    
+</body>
+
+<script>
+
+      var myform=document.getElementById('myform')
+
+      myform.addEventListener('submit',function(e){
+
+          e.preventDefault()
+        var country=document.getElementById('country').value 
+
+        // fetching data 
+         var url= "https://api.covid19api.com/total/dayone/country/"+country  ; 
+          
+          fetch(url)
+
+          .then((res) => res.json())
+          .then((res) => {
+            
+             var  length= res.length 
+             var index=length-1 
+             var active= document.getElementById('active')
+             var confirmed= document.getElementById('confirmed')
+             var recovered= document.getElementById('recovered')
+             var  deaths= document.getElementById('deaths')
+
+             confirmed.innerHTML=''
+             active.innerHTML=''
+              recovered.innerHTML=''
+               deaths.innerHTML=''
+              active.append("Total Active :"+res[index].Active)
+             confirmed.append("Total Confirmed :"+res[index].Confirmed)
+              recovered.append("Total Recovered :"+res[index].Recovered)
+              deaths.append("Total Deaths :"+res[index].Deaths)
+          
+          
+          })
+
+      }) 
+   
+      
+    //   alert(country) 
+
+</script>
+</html>
